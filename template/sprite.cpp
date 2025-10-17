@@ -28,7 +28,7 @@ Sprite::~Sprite()
 }
 
 // draw sprite to target surface
-void Sprite::Draw( Surface* target, int x, int y )
+void Sprite::Draw( const Surface* target, int x, int y )
 {
 	if (x < -width || x >( target->width + width )) return;
 	if (y < -height || y >( target->height + height )) return;
@@ -63,7 +63,7 @@ void Sprite::Draw( Surface* target, int x, int y )
 }
 
 // draw scaled sprite
-void Sprite::DrawScaled( int x1, int y1, int w, int h, Surface* target )
+void Sprite::DrawScaled( int x1, int y1, int w, int h, const Surface* target )
 {
 	if (width == 0 || height == 0) return;
 	for (int x = 0; x < w; x++) for (int y = 0; y < h; y++)

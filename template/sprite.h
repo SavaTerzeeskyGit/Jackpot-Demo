@@ -12,11 +12,12 @@ class Sprite
 {
 public:
 	// structors
+	Sprite() = default;
 	Sprite( Surface* surface, unsigned int frameCount );
 	~Sprite();
 	// methods
-	void Draw( Surface* target, int x, int y );
-	void DrawScaled( int x, int y, int width, int height, Surface* target );
+	void Draw( const Surface* target, int x, int y );
+	void DrawScaled( int x, int y, int width, int height, const Surface* target );
 	void SetFlags( unsigned int f ) { flags = f; }
 	void SetFrame( unsigned int i ) { currentFrame = i; }
 	unsigned int GetFlags() const { return flags; }
