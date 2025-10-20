@@ -1,35 +1,45 @@
 #pragma once
+#include "Base.h"
 #include "JackpotSlot.h"
+#include "array"
 
 class Jackpot : public Base
 {
 public:
-	Jackpot(int2 pos, int2 widthHeight);
-	~Jackpot();
+	Jackpot() = default;
+	~Jackpot() override;
 
-	void Spin();
+	Jackpot(const int2& pos, const int2& widthHeight);
+
+	void Initialize(const int2& pos, const int2& widthHeight, const int2& slotWidthHeight, const int2& spriteWithHeight, const int& padding, const std::array<Sprite, 5>& sprites);
+
 	void Update(const float& deltaTime) override;
 	void Draw(const Surface* screen) override;
 
+	void Stop();
+	void Start();
+	void CalculateScore();
+
+	void SetSlots(int2 pos, int2 widthHeight);
+	void UpdateSpritesToPass(const std::array<Sprite, 5>& sprites);
+	void DrawWinningEntries(Surface* screen);
+
+	int GetScore() { return m_Score; }
+
 private:
 	const std::unique_ptr<Surface> m_Border = std::make_unique<Surface>("assets/Border.png");
-	const std::unique_ptr<Surface> m_Ball = std::make_unique<Surface>("assets/ball.png");
-	const std::unique_ptr<Surface> m_X = std::make_unique<Surface>("assets/x.png");
-	const std::unique_ptr<Surface> m_Heart = std::make_unique<Surface>("assets/heart.png");
-	const std::unique_ptr<Surface> m_Lightning = std::make_unique<Surface>("assets/lightning.png");
-	const std::unique_ptr<Surface> m_Star = std::make_unique<Surface>("assets/star.png");
-
 	Sprite m_JackpotBorder = Sprite(m_Border.get(), 1);
-	Sprite m_SpriteBall = Sprite(m_Ball.get(), 1);
-	Sprite m_SpriteX = Sprite(m_X.get(), 1);
-	Sprite m_SpriteHeart = Sprite(m_Heart.get(), 1);
-	Sprite m_SpriteLightning = Sprite(m_Lightning.get(), 1);
-	Sprite m_SpriteStar = Sprite(m_Star.get(), 1);
 
-	//JackpotSlot slots[5];
-	
-	//const int m_PosX = 50;
-	//const int m_PosY = 50;
-	//const int m_Width = 1500;
-	//const int m_Height = 1000;
+
+	std::array<JackpotSlot, 5> m_Slots{};
+	std::array<Sprite, 5> m_Sprites{};
+	std::array<Sprite, 3> m_SpritesToPass{};
+
+	std::vector<SlotEntry*> m_WinningEntries;
+	std::vector<Sprite> uniqueSprites;
+
+	int2 m_Borders = int2(0);
+	int m_Padding = 150;
+	int m_Score = 0;
+	bool m_StopSpinning = false;
 };
