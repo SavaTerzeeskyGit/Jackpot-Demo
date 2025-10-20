@@ -26,6 +26,7 @@
     <ClCompile Include="Jackpot.cpp" />
     <ClCompile Include="JackpotSlot.cpp" />
     <ClCompile Include="Base.cpp" />
+    <ClCompile Include="SlotEntry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -59,6 +60,7 @@
     <ClInclude Include="Jackpot.h" />
     <ClInclude Include="JackpotSlot.h" />
     <ClInclude Include="Base.h" />
+    <ClInclude Include="SlotEntry.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">

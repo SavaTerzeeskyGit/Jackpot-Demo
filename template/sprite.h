@@ -15,6 +15,17 @@ public:
 	Sprite() = default;
 	Sprite( Surface* surface, unsigned int frameCount );
 	~Sprite();
+	// equality operators
+	bool operator==(const Sprite& other) const
+	{
+		return surface == other.surface
+			&& currentFrame == other.currentFrame
+			&& flags == other.flags
+			&& width == other.width
+			&& height == other.height;
+	}
+
+	bool operator!=(const Sprite& other) const { return !(*this == other); }
 	// methods
 	void Draw( const Surface* target, int x, int y );
 	void DrawScaled( int x, int y, int width, int height, const Surface* target );
@@ -34,7 +45,7 @@ private:
 	unsigned int currentFrame;
 	unsigned int flags;
 	unsigned int** start;
-	Surface* surface;
+	Surface* surface = nullptr;
 };
 
 }
